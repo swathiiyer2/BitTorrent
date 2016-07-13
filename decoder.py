@@ -6,14 +6,11 @@ from random import choice
 import requests
 import urllib
 
-from torrent import Torrent
-
 
 class decodeFile():
   def __init__(self, inputURL):
     self.inputURL = inputURL
     self.decodeFile()
-    self.torrent = Torrent(self.info)
     self.tracker()
 
   def decodeFile(self):
@@ -27,9 +24,9 @@ class decodeFile():
     info_hash = sha1(self.reencoded).digest()
     peer_id = self.make_id()
     port = "9999"
-    uploaded = str(self.torrent.uploaded)
-    downloaded = str(self.torrent.downloaded)
-    left = str(self.torrent.left)
+    uploaded = "0"
+    downloaded = "0"
+    left = str(self.info['files'][1]['length'])
     request_hash = {
       "info_hash": info_hash,
       "peer_id": peer_id,
@@ -56,6 +53,4 @@ class decodeFile():
       
 
 testTorrent = decodeFile("Marcus Williams.Miles.Davis.Marcus.Miller.Live.In.Paris.[mp3_192k].[www.mywpmusic.com] [mininova].torrent")
-
-print(testTorrent.response)
 
