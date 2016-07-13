@@ -7,6 +7,3 @@ class Torrent():
     self.downloaded = 0
     self.length = info['files'][1]['length']
     self.left = self.length - self.downloaded
-
-  
-    

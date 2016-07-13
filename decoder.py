@@ -36,7 +36,7 @@ class decodeFile():
       "port": port,
       "uploaded": uploaded,
       "downloaded": downloaded,
-      "left": left}
+      "left": left}qq
     return request_hash
 
   def tracker(self):
