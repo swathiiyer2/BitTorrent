@@ -4,6 +4,7 @@ from hashlib import sha1
 from string import ascii_lowercase, digits
 from random import choice
 import requests
+import urllib
 
 
 class decodeFile():
@@ -19,7 +20,7 @@ class decodeFile():
     self.info = d['info']
     self.reencoded = bencode(self.info)
 
-  def tracker(self):
+  def make_params(self):
     info_hash = sha1(self.reencoded).digest()
     peer_id = self.make_id()
     port = "9999"
@@ -33,10 +34,13 @@ class decodeFile():
       "uploaded": uploaded,
       "downloaded": downloaded,
       "left": left}
-    r = requests.get(self.url, params=request_hash)
+    return request_hash
 
-    print(r.content)
-
+  def tracker(self):
+    params_dict = self.make_params()
+    r = requests.get(self.url, params=params_dict)
+    self.response = r.content
+    
   def make_id(self):
     id = "RC0001"
     for _ in range(14):
