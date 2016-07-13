@@ -2,6 +2,6 @@
 
 ## Install Instructions
 ### Linux
-$ sudo apt-get install python-pip
-$ pip install bcoding
+    sudo apt-get install python-pip
+    pip install bcoding
 
