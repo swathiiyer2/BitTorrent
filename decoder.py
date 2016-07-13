@@ -39,7 +39,9 @@ class decodeFile():
   def tracker(self):
     params_dict = self.make_params()
     r = requests.get(self.url, params=params_dict)
-    self.response = r.content
+    self.response = bdecode(r.content)
+    self.peers = self.response['peers']
+    
     
   def make_id(self):
     id = "RC0001"
