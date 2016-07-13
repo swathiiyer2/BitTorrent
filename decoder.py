@@ -21,15 +21,15 @@ class decodeFile():
     self.reencoded = bencode(self.info)
 
   def make_params(self):
-    info_hash = sha1(self.reencoded).digest()
-    peer_id = self.make_id()
+    self.info_hash = sha1(self.reencoded).digest()
+    self.peer_id = self.make_id()
     port = "9999"
     uploaded = "0"
     downloaded = "0"
     left = str(self.info['files'][1]['length'])
     request_hash = {
-      "info_hash": info_hash,
-      "peer_id": peer_id,
+      "info_hash": self.info_hash,
+      "peer_id": self.peer_id,
       "port": port,
       "uploaded": uploaded,
       "downloaded": downloaded,
