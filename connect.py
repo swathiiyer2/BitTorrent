@@ -26,10 +26,16 @@ class Tracker():
   
   def tracker(self):
     params_dict = self.make_params()
-    r = requests.get(self.url, params=params_dict)
+    r = requests.get(self.announce_url, params=params_dict)
     self.response = bdecode(r.content)
-    self.peers = self.response['peers']
-
+    bin_string = self.response['peers']
+    peer_array = []
+    for n in range(0,len(bin_string), 6): 
+        array_string = ""
+        array_string += str(bin_string[n]) + '.' + str(bin_string[n+1])+'.'+str(bin_string[n+2])+'.'+str(bin_string[n+3])
+        array_string += ":" + str(bin_string[n + 4] * 256 + bin_string[n + 5]) 
+        peer_array.append(array_string) 
+    return peer_array
     
   def make_id(self):
     id = "RC0001"
