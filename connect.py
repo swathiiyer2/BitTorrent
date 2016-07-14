@@ -2,30 +2,26 @@ import requests
 from bcoding import bencode, bdecode
 from random import choice
 from string import ascii_lowercase, digits
-from hashlib import sha1
 
 class Tracker():
-  def __init__(self, url, info, uploaded=0, downloaded=0):
+  def __init__(self, url, info_hash, left, uploaded=0, downloaded=0):
     self.announce_url = url
-    self.info = info
-    self.encoded = bencode(self.info)
+    self.info_hash = info_hash
     self.uploaded = uploaded
     self.downloaded = downloaded
-    self.left = str(self.info['files'][1]['length'])
+    self.left = left
 
     
   def make_params(self):
-    self.info_hash = sha1(self.encoded).digest()
     self.peer_id = self.make_id()
     port = "9999"
-    request_hash = {
+    return {
       "info_hash": self.info_hash,
       "peer_id": self.peer_id,
       "port": port,
-      "uploaded": uploaded,
-      "downloaded": downloaded,
-      "left": left}
-    return request_hash
+      "uploaded": self.uploaded,
+      "downloaded": self.downloaded,
+      "left": self.left}
 
   
   def tracker(self):
