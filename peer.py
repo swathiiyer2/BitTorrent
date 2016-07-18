@@ -17,6 +17,7 @@ class Peer:
     self.bitfield = None
 
   def connect(self):
+    #I think I have the correct handshake, but the connection times out
     self.connection = socket.socket()
     self.connection.settimeout(0.5)
     try:
@@ -40,4 +41,5 @@ class Peer:
     return h
 
   def check_response(response):
+    #This should check that their handshake returns the correct hash
     return True

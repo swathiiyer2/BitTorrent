@@ -13,7 +13,10 @@ def test_handshake():
 
 
 from connect import Tracker
+from decoder import decodeFile as Decoder
 from test_decode import d
+
+#d = Decoder("tom.torrent")
 
 infohash = d.info_hash
 url = d.url
